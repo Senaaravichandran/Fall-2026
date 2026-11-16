@@ -1,0 +1,290 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Source+Serif+4:wght@400;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: 1920px 1080px; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --navy: #0b1f3a; --navy2: #132b4d; --blue: #1d4ed8; --sky: #93b4ff; --green: #059669; --mint: #6ee7b7; --amber: #d97706; --red: #dc2626; --ink: #0b1f3a; --muted: #5b6b82; --surface: #f1f4f9; }
+  body { font-family: "Libre Franklin", Arial, sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .s { width: 1920px; height: 1080px; position: relative; overflow: hidden; page-break-after: always; break-after: page; background: #fff; padding: 96px 120px; }
+  .s.dark { background: var(--navy); color: #fff; }
+  .bar { position: absolute; left: 0; right: 0; top: 0; height: 12px; display: flex; }
+  .bar i { flex: 1; }
+  .kick { font-size: 24px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--blue); }
+  .dark .kick { color: var(--sky); }
+  h1 { font-size: 92px; line-height: 1.0; font-weight: 800; letter-spacing: -.035em; }
+  h2 { font-size: 68px; line-height: 1.04; font-weight: 800; letter-spacing: -.03em; margin-top: 18px; }
+  .lede { font-size: 32px; line-height: 1.4; color: var(--muted); margin-top: 26px; max-width: 1450px; }
+  .dark .lede { color: rgba(255,255,255,.78); }
+  .foot { position: absolute; left: 120px; right: 120px; bottom: 48px; display: flex; justify-content: space-between; font-size: 20px; color: var(--muted); }
+  .dark .foot { color: rgba(255,255,255,.5); }
+  .mark { display: inline-flex; align-items: center; gap: 14px; font-weight: 800; font-size: 26px; letter-spacing: -.03em; }
+  .grid { display: grid; gap: 22px; margin-top: 64px; }
+  .g2 { grid-template-columns: repeat(2, 1fr); } .g3 { grid-template-columns: repeat(3, 1fr); } .g4 { grid-template-columns: repeat(4, 1fr); }
+  .card { background: var(--surface); padding: 36px 38px; }
+  .dark .card { background: var(--navy2); }
+  .card h3 { font-size: 34px; font-weight: 700; letter-spacing: -.01em; }
+  .card p { font-size: 26px; line-height: 1.45; margin-top: 12px; color: var(--muted); }
+  .dark .card p { color: rgba(255,255,255,.75); }
+  .card .tag { font-size: 17px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .dark .card .tag { color: var(--sky); }
+  .big { font-size: 100px; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+  .num { color: var(--blue); }
+  .dark .num { color: #fff; }
+  .src { font-size: 17px; margin-top: 12px; color: var(--muted); }
+  .dark .src { color: rgba(255,255,255,.5); }
+  .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin-top: 54px; row-gap: 18px; }
+  .step { padding: 26px 28px; background: var(--surface); min-width: 200px; }
+  .step b { display: block; font-size: 28px; }
+  .step span { display: block; font-size: 20px; color: var(--muted); margin-top: 4px; }
+  .dark .step { color: var(--ink); } .dark .step span { color: var(--muted); }
+  .step.n { background: var(--navy); color: #fff; } .step.n span { color: rgba(255,255,255,.7); }
+  .step.a { background: var(--blue); color: #fff; } .step.a span { color: rgba(255,255,255,.8); }
+  .step.w { background: #fef3c7; } .step.g { background: #d1fae5; }
+  .arr { display: flex; align-items: center; padding: 0 12px; font-size: 30px; color: var(--muted); }
+  .shot { box-shadow: 0 24px 60px rgba(11,31,58,.22); display: block; }
+  .dark .shot { box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+  .cap { font-size: 24px; line-height: 1.45; color: var(--muted); }
+  .dark .cap { color: rgba(255,255,255,.75); }
+  .cap b { color: var(--ink); } .dark .cap b { color: #fff; }
+  table { border-collapse: collapse; width: 100%; margin-top: 44px; font-size: 27px; }
+  td, th { padding: 22px 22px; text-align: left; vertical-align: top; }
+  th { font-size: 19px; font-weight: 600; color: var(--muted); }
+  tr:nth-child(even) td { background: var(--surface); }
+  .ok { color: var(--green); font-weight: 700; }
+  mark { background: #dbe6fd; box-shadow: inset 0 -3px 0 var(--blue); color: inherit; padding: 0 4px; }
+  code { font-family: "JetBrains Mono", monospace; font-variant-ligatures: none; }
+</style>
+</head>
+<body>
+
+<!-- 1 Title -->
+<section class="s dark">
+  <div class="bar"><i style="background:#1d4ed8"></i><i style="background:#059669"></i><i style="background:#d97706"></i><i style="background:#dc2626"></i></div>
+  <div class="mark" style="font-size:44px">
+    <svg width="64" height="64" viewBox="0 0 32 32"><rect width="32" height="32" fill="#1d4ed8"/><circle cx="10" cy="16" r="4.2" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M14.4 16 H25" stroke="#fff" stroke-width="2.4"/><path d="M21.5 11.8 L25.8 16 L21.5 20.2" fill="none" stroke="#fff" stroke-width="2.4"/></svg>
+    NIYAM
+  </div>
+  <h1 style="margin-top:110px;font-size:128px">Every clause<br>becomes a <span style="color:#60a5fa">rule.</span></h1>
+  <p class="lede" style="font-size:38px;max-width:1300px;margin-top:44px">Seven AI agents turn a regulatory circular into a tested, two-person-approved, monitored live bank rule, and trace every alert back to the sentence that caused it.</p>
+  <div class="foot"><span>Team Dragorithm · Fall 2026 Projects</span><span>niyam-fall-2026.vercel.app</span></div>
+</section>
+
+<!-- 2 Problem -->
+<section class="s">
+  <p class="kick">The problem</p>
+  <h2>The regulator changes a rule.<br>Every bank must follow it, correctly and on time.</h2>
+  <p class="lede">A circular is written for people. A bank runs on systems. In between sit weeks of reading, meetings, tickets and testing, and a penalty if the bank gets it wrong or late.</p>
+  <div class="grid g4" style="margin-top:70px">
+    <div class="card"><div class="big num">244</div><p>RBI Master Directions replacing about 9,000 circulars; each now changes by amendment</p><p class="src">Business Today, 28 Nov 2025</p></div>
+    <div class="card"><div class="big num">353</div><p>RBI penalties in 2024-25, worth ₹54.78 crore; 264 on co-operative banks</p><p class="src">RBI Annual Report 2024-25</p></div>
+    <div class="card"><div class="big num">1 yr+</div><p>to fully implement a regulatory change, by compliance officers' own account</p><p class="src">CUBE Cost of Compliance 2025</p></div>
+    <div class="card"><div class="big num">10,748</div><p>urban co-operative banks and NBFCs applying the same rules with small teams</p><p class="src">RBI, 2024-25</p></div>
+  </div>
+</section>
+
+<!-- 3 Today -->
+<section class="s">
+  <p class="kick">How a bank does it today</p>
+  <h2>Eleven manual steps. One to six months.</h2>
+  <div class="flow">
+    <div class="step"><b>Spot the circular</b><span>Compliance</span></div><div class="arr">→</div>
+    <div class="step"><b>Does it apply?</b><span>Compliance</span></div><div class="arr">→</div>
+    <div class="step"><b>List obligations</b><span>Compliance, Legal</span></div><div class="arr">→</div>
+    <div class="step"><b>Map to policy</b><span>Compliance, Risk</span></div><div class="arr">→</div>
+    <div class="step"><b>Ticket to IT</b><span>Change request</span></div><div class="arr">→</div>
+    <div class="step"><b>Build the rule</b><span>IT</span></div><div class="arr">→</div>
+    <div class="step"><b>Test and UAT</b><span>QA, business</span></div><div class="arr">→</div>
+    <div class="step"><b>Backtest</b><span>Risk, IT</span></div><div class="arr">→</div>
+    <div class="step w"><b>Approve</b><span>Maker, checker</span></div><div class="arr">→</div>
+    <div class="step"><b>Deploy</b><span>IT operations</span></div><div class="arr">→</div>
+    <div class="step"><b>Monitor, roll back</b><span>By hand</span></div>
+  </div>
+  <div class="grid g3" style="margin-top:60px">
+    <div class="card"><h3>Meaning gets lost</h3><p>“Exceeding 25%” becomes “25% or more” somewhere between the circular, the ticket and the code.</p></div>
+    <div class="card"><h3>Deadlines slip</h3><p>Every step waits for the one before it. A late rule is a breach.</p></div>
+    <div class="card"><h3>No trace back</h3><p>When an inspector asks why an alert fired, the answer is spread across emails, tickets and code.</p></div>
+  </div>
+</section>
+
+<!-- 4 Solution -->
+<section class="s dark">
+  <p class="kick">Our solution</p>
+  <h2>NIYAM: Regulatory Circular to Live Rule Engine</h2>
+  <p class="lede">Not an agent that reads a circular and tells you what to do. NIYAM produces the <b style="color:#fff">tested, approved, monitored rule</b> itself, and proves why every alert fired.</p>
+  <div class="flow" style="margin-top:80px">
+    <div class="step"><b>Circular</b><span>PDF, Word, text</span></div><div class="arr" style="color:#93b4ff">→</div>
+    <div class="step n" style="background:#1d4ed8"><b>7 agents</b><span>read, extract, map</span></div><div class="arr" style="color:#93b4ff">→</div>
+    <div class="step"><b>Typed rules</b><span>never raw SQL</span></div><div class="arr" style="color:#93b4ff">→</div>
+    <div class="step"><b>Tests + backtest</b><span>from the regulation</span></div><div class="arr" style="color:#93b4ff">→</div>
+    <div class="step w"><b>2 signatures</b><span>maker and checker</span></div><div class="arr" style="color:#93b4ff">→</div>
+    <div class="step"><b>Shadow → canary → live</b><span>feature flags</span></div><div class="arr" style="color:#93b4ff">→</div>
+    <div class="step g"><b>Sentinel</b><span>auto-rollback</span></div>
+  </div>
+  <div class="grid g3" style="margin-top:70px">
+    <div class="card"><div class="tag">Fast</div><h3>Minutes, not months</h3><p>Reading, scoping, mapping, drafting and testing run in one pass.</p></div>
+    <div class="card"><div class="tag">Safe</div><h3>AI never touches production</h3><p>Two people sign; the rule earns its way in through shadow and canary.</p></div>
+    <div class="card"><div class="tag">Provable</div><h3>The Golden Thread</h3><p>Any alert → rule version → approvers → obligation → the exact sentence.</p></div>
+  </div>
+</section>
+
+<!-- 5 Agents -->
+<section class="s">
+  <p class="kick">How it works</p>
+  <h2>Seven agents, one job each</h2>
+  <div class="grid g4">
+    <div class="card" style="background:#0b1f3a;color:#fff"><div class="tag" style="color:#93b4ff">Master agent</div><h3>Conductor</h3><p style="color:rgba(255,255,255,.75)">Finds the agents by their A2A Agent Cards and hands each its task.</p></div>
+    <div class="card"><div class="tag">Agent 1</div><h3>Reader</h3><p>Splits the circular into clauses; decides which bind this bank's licence.</p></div>
+    <div class="card"><div class="tag">Agent 2</div><h3>Extractor</h3><p>Obligation with number, operator and the exact quote, or it is rejected.</p></div>
+    <div class="card"><div class="tag">Agent 3</div><h3>Mapper</h3><p>Finds the bank's rules and policies to change, gaps and conflicts.</p></div>
+    <div class="card"><div class="tag">Agent 4</div><h3>Author</h3><p>Writes typed rule files on a draft branch, checked by schema and compiler.</p></div>
+    <div class="card" style="background:#fde8e8"><div class="tag">Agent 5</div><h3>Validator</h3><p>Boundary tests from the regulation; objects to the Author over A2A; 90-day backtest.</p></div>
+    <div class="card" style="background:#d1fae5"><div class="tag">Agent 6</div><h3>Release</h3><p>Verifies both signatures; shadow, canary 10%, live; rolls back on drift.</p></div>
+    <div class="card" style="background:#fef3c7"><div class="tag">Humans</div><h3>Maker + checker</h3><p>Sign with name, ID, reason and checklist, bound to the exact file.</p></div>
+  </div>
+  <p class="cap" style="margin-top:36px">Agents reach data and tools only through <b>seven MCP servers</b> with per-agent allowlists, checked twice. Runs fully rule-based; an LLM is optional and checked by the same gates.</p>
+</section>
+
+<!-- 6 Demo: setup -->
+<section class="s">
+  <p class="kick">Live prototype · 1 of 4</p>
+  <h2 style="font-size:56px">Choose a bank, or add your own. Its circular PDF is read for real.</h2>
+  <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:56px;margin-top:44px;align-items:start">
+    <img class="shot" src="../gallery/02_choose_bank_and_circular.png" style="width:100%">
+    <div class="cap">
+      <p><b>Four synthetic banks</b>: a private bank, a public bank, a co-operative bank and an NBFC, each with its own capital, live rules, policy, loan book and circular.</p>
+      <p style="margin-top:22px"><b>Add your own bank</b>: name, licence, capital, live rules and Board policy.</p>
+      <p style="margin-top:22px"><b>Upload any circular</b> as PDF, Word or text. The PDF and its source text produce identical rules (tested).</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 Demo: agents -->
+<section class="s">
+  <p class="kick">Live prototype · 2 of 4</p>
+  <h2 style="font-size:56px">Watch the agents work, and see what each produced</h2>
+  <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:56px;margin-top:44px;align-items:start">
+    <img class="shot" src="../gallery/04_what_each_agent_produced.png" style="width:100%">
+    <div class="cap">
+      <p>Each step says <b>what</b> the agent does for this bank and <b>how</b>.</p>
+      <p style="margin-top:22px">DEF Bank's circular says <mark>“20 per cent or more”</mark>: the rule fires on <code>&gt;=</code>, not <code>&gt;</code>. Generated boundary tests prove it: <b>13/13 pass</b>.</p>
+      <p style="margin-top:22px">The Validator objected once and the Author fixed the draft <b>before any human saw it</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8 Demo: approval -->
+<section class="s">
+  <p class="kick">Live prototype · 3 of 4</p>
+  <h2 style="font-size:56px">Two people sign. Change one character and release is refused.</h2>
+  <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:56px;margin-top:44px;align-items:start">
+    <img class="shot" src="../gallery/06_signed_approval_tokens.png" style="width:100%">
+    <div class="cap">
+      <p><b>Maker</b> (Chief Compliance Officer) and <b>checker</b> (Head of Risk) each give a name, employee ID, a reason and four review checks.</p>
+      <p style="margin-top:22px">Each signature is an <b>HMAC-SHA256 token</b> over the rule's SHA-256, the approver, role and reason; valid 24 hours.</p>
+      <p style="margin-top:22px">A built-in <b>tamper test</b> edits a signed rule: Release refuses it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9 Demo: bank site -->
+<section class="s dark">
+  <p class="kick">Live prototype · 4 of 4</p>
+  <h2 style="font-size:56px">The bank's own site plays the rollout live</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:44px">
+    <img class="shot" src="../gallery/07_bank_site_shadow_mode.png" style="width:100%">
+    <img class="shot" src="../gallery/11_golden_thread.png" style="width:100%">
+  </div>
+  <p class="cap" style="margin-top:34px"><b>Shadow</b> (logs only) → <b>canary</b> (10% of customers) → <b>live</b>. Old rule against new rule, day by day. An injected data fault is caught by the <b>Sentinel</b> and rolled back automatically. Then the <b>Golden Thread</b> traces an alert to its sentence.</p>
+</section>
+
+<!-- 10 Architecture -->
+<section class="s">
+  <p class="kick">Architecture</p>
+  <h2>Open protocols, deterministic gates</h2>
+  <div class="grid g3">
+    <div class="card"><h3>A2A agents</h3><p>Seven agents with Agent Cards and JSON-RPC endpoints; objections travel Validator → Author, at most three rounds.</p></div>
+    <div class="card"><h3>MCP tool servers</h3><p>Knowledge graph, semantic model, rule compiler, backtest, git, approvals, deploy-monitor. Least privilege.</p></div>
+    <div class="card"><h3>Knowledge graph</h3><p>Circular → clause → obligation → rule version → approval → alert; Neo4j schema, one query per thread.</p></div>
+    <div class="card"><h3>Bank Semantic Model</h3><p>Business terms mapped to the bank's columns, so a rule never points at a field that does not exist.</p></div>
+    <div class="card"><h3>Typed rule language</h3><p>Strict schema compiled to read-only SQL by code; reviewable by compliance staff.</p></div>
+    <div class="card"><h3>Stack</h3><p>Next.js and TypeScript on Vercel, official MCP SDK, SQLite in WebAssembly, isomorphic-git, PDF and Word intake.</p></div>
+  </div>
+</section>
+
+<!-- 11 Market -->
+<section class="s">
+  <p class="kick">Users and market</p>
+  <h2>Start where teams are smallest</h2>
+  <div class="grid g2" style="grid-template-columns:1.1fr 1fr;gap:40px">
+    <div>
+      <table style="margin-top:0">
+        <tr><th>Segment</th><th>Why</th></tr>
+        <tr><td><b>Urban co-operative banks</b></td><td>1,457 of them; bank-level rules, tiny teams, most penalties</td></tr>
+        <tr><td><b>NBFCs</b></td><td>9,291 registered; bank-like concentration rules</td></tr>
+        <tr><td><b>Small finance and payments banks</b></td><td>Fast-growing, short of compliance staff</td></tr>
+        <tr><td><b>Large banks</b></td><td>A layer over the rule engines they already run</td></tr>
+      </table>
+    </div>
+    <div class="card" style="background:#0b1f3a;color:#fff;padding:44px">
+      <div class="big" style="color:#fff">$15-19 bn</div>
+      <p style="color:rgba(255,255,255,.8);font-size:26px;margin-top:16px">global RegTech market in 2025, growing 17 to 21% a year</p>
+      <p class="src" style="color:rgba(255,255,255,.5)">IMARC Group; ResearchAndMarkets</p>
+      <p style="color:#fff;font-size:26px;margin-top:40px;line-height:1.4">Existing tools stop at telling a bank what changed. <b>Circular to live rule</b> is the open step.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 12 Business -->
+<section class="s">
+  <p class="kick">Business model and roadmap</p>
+  <h2>Priced per regulated entity</h2>
+  <div class="grid g4" style="margin-top:44px">
+    <div class="card"><div class="tag">Recurring</div><h3>Subscription</h3><p>Annual licence per entity, tiered by size and licence type.</p></div>
+    <div class="card"><div class="tag">One-time</div><h3>Engine adapters</h3><p>One MCP adapter per AML, fraud or limit engine; reused across banks.</p></div>
+    <div class="card"><div class="tag">Services</div><h3>Onboarding</h3><p>Map the semantic model to the bank's tables; load rules and policies.</p></div>
+    <div class="card"><div class="tag">Private</div><h3>In the bank</h3><p>Runs inside the bank's boundary; data never leaves.</p></div>
+  </div>
+  <div class="flow" style="margin-top:56px">
+    <div class="step a"><b>Now</b><span>working prototype</span></div><div class="arr">→</div>
+    <div class="step"><b>0-3 months</b><span>read-only pilot</span></div><div class="arr">→</div>
+    <div class="step"><b>3-6 months</b><span>engine connectors</span></div><div class="arr">→</div>
+    <div class="step"><b>6-12 months</b><span>every Master Direction</span></div><div class="arr">→</div>
+    <div class="step"><b>12-24 months</b><span>SEBI, IRDAI</span></div>
+  </div>
+</section>
+
+<!-- 13 Proof -->
+<section class="s dark">
+  <p class="kick">What is built and proven</p>
+  <h2>Working, deployed, tested</h2>
+  <div class="grid g4" style="margin-top:60px">
+    <div class="card"><div class="big">143</div><p>automated tests, including every bank end to end</p></div>
+    <div class="card"><div class="big">4 + 1</div><p>sample banks plus a bank you define</p></div>
+    <div class="card"><div class="big">100%</div><p>of obligations carry a verified exact quote</p></div>
+    <div class="card"><div class="big">₹0</div><p>per run in rule-based mode; no LLM key needed</p></div>
+  </div>
+  <div class="grid g3" style="margin-top:22px">
+    <div class="card"><h3>Built</h3><p>PDF/Word intake, 7 agents, MCP allowlists, typed rules, tests, backtest, signed approvals, shadow/canary/live, Sentinel, Golden Thread, bank sites.</p></div>
+    <div class="card"><h3>Production design</h3><p>OCR for scanned PDFs, Neo4j and a warehouse inside the bank, adapters for real rule engines.</p></div>
+    <div class="card"><h3>Honest about data</h3><p>Every bank, circular, loan and approver in the prototype is synthetic and labelled so.</p></div>
+  </div>
+</section>
+
+<!-- 14 Close -->
+<section class="s dark">
+  <div class="bar"><i style="background:#1d4ed8"></i><i style="background:#059669"></i><i style="background:#d97706"></i><i style="background:#dc2626"></i></div>
+  <p class="kick">Try it</p>
+  <h1 style="margin-top:30px;font-size:110px">Every clause<br>becomes a <span style="color:#60a5fa">rule.</span></h1>
+  <div class="grid g3" style="margin-top:90px">
+    <div class="card"><div class="tag">Prototype</div><h3>niyam-fall-2026.vercel.app</h3></div>
+    <div class="card"><div class="tag">PRD</div><h3>niyam-fall-2026.vercel.app/prd</h3></div>
+    <div class="card"><div class="tag">Code</div><h3>github.com/Senaaravichandran/Fall-2026</h3></div>
+  </div>
+  <div class="foot"><span>Team Dragorithm · Fall 2026 Projects</span><span>Synthetic data throughout · RBI statistics cited at source</span></div>
+</section>
+
+</body>
+</html>
