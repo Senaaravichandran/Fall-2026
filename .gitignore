@@ -52,3 +52,4 @@ assets/
 !bank-rules/
 !bank-rules/*.pdf
 !public/bank-rules/*.pdf
+.env*.local
